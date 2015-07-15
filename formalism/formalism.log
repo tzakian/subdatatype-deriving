@@ -1,0 +1,291 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  15 JUL 2015 17:04
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**formalism.tex
+(./formalism.tex
+LaTeX2e <2014/05/01>
+Babel <3.9k> and hyphenation patterns for 78 languages loaded.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/mathpazo.sty
+Package: mathpazo 2005/04/12 PSNFSS-v9.2a Palatino w/ Pazo Math (D.Puga, WaS) 
+\symupright=\mathgroup4
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/eulervm/eulervm.sty
+Package: eulervm 2005/01/11 v4.0 (WaS)
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count87
+\float@exts=\toks14
+\float@box=\box26
+\@float@everytoks=\toks15
+\@floatcapt=\box27
+)
+(./mathpartir.sty
+Package: mathpartir 2005/12/20 version 1.2.0 Math Paragraph for Typesetting Inf
+erence Rules
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/05/08 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+\mpr@andskip=\skip43
+\mpr@lista=\toks17
+\mpr@listb=\toks18
+\mpr@hlist=\box28
+\mpr@vlist=\box29
+\mpr@right=\box30
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count88
+\Gm@cntv=\count89
+\c@Gm@tempcnt=\count90
+\Gm@bindingoffset=\dimen103
+\Gm@wd@mp=\dimen104
+\Gm@odd@mp=\dimen105
+\Gm@even@mp=\dimen106
+\Gm@layoutwidth=\dimen107
+\Gm@layoutheight=\dimen108
+\Gm@layouthoffset=\dimen109
+\Gm@layoutvoffset=\dimen110
+\Gm@dimlist=\toks19
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count91
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks20
+\symAMSa=\mathgroup5
+\symAMSb=\mathgroup6
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(./semantic.sty
+Package: semantic 2003/10/28 v2.0(epsilon) 
+
+Semantic Package v2.0(epsilon) [2003/10/28]
+CVSId: $Id: semantic.dtx,v 1.11 2003/10/28 13:45:57 turtle Exp $
+\c@@@conflict=\count92
+Loading features: 
+(/usr/local/texlive/2014/texmf-dist/tex/latex/semantic/infernce.sty
+\@@tempa=\toks21
+\@@tempb=\toks22
+\@@pSpace=\skip44
+\@@pEnd=\skip45
+\@@nSpace=\skip46
+\@@aLineBox=\box31
+)
+ inference rules,
+and general definitions.
+
+\@@maxwidth=\dimen111
+\@@pLineBox=\box32
+\@@cBox=\box33
+\@@pBox=\box34
+)
+\@float@every@figure=\toks23
+ (./macro-defs.tex
+\c@thm=\count93
+\c@lem=\count94
+) (./formalism.aux)
+\openout1 = `formalism.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Try loading font information for OT1+pplj on input line 17.
+
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/ot1pplj.fd
+File: ot1pplj.fd 2004/09/06 font definitions for OT1/pplj.
+)
+\big@size=\dimen112
+\big@size=\dimen113
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(72.26999pt, 469.75502pt, 72.26999pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43001pt, 72.26999pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=469.75502pt
+* \textheight=650.43001pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count95
+\scratchdimen=\dimen114
+\scratchbox=\box35
+\nofMPsegments=\count96
+\nofMParguments=\count97
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count98
+\MPscratchDim=\dimen115
+\MPnumerator=\count99
+\makeMPintoPDFobject=\count100
+\everyMPtoPDFconversion=\toks25
+)
+LaTeX Font Info:    Try loading font information for U+zeur on input line 18.
+ (/usr/local/texlive/2014/texmf-dist/tex/latex/eulervm/uzeur.fd
+File: uzeur.fd 2005/01/11 v4.0 (WaS)
+)
+LaTeX Font Info:    Try loading font information for U+zeus on input line 18.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/eulervm/uzeus.fd
+File: uzeus.fd 2005/01/11 v4.0 (WaS)
+)
+LaTeX Font Info:    Try loading font information for U+zeuex on input line 18.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/eulervm/uzeuex.fd
+File: uzeuex.fd 2005/01/11 v4.0 (WaS)
+)
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 18.
+
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/ot1zplm.fd
+File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
+) (./langdef.tex
+LaTeX Font Info:    Font shape `OT1/pplj/bx/n' in size <14.4> not available
+(Font)              Font shape `OT1/pplj/b/n' tried instead on input line 1.
+LaTeX Font Info:    Try loading font information for OMS+pplj on input line 4.
+LaTeX Font Info:    No file OMSpplj.fd. on input line 4.
+
+LaTeX Font Warning: Font shape `OMS/pplj/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbullet' on input line 4.
+
+LaTeX Font Info:    Font shape `OT1/pplj/bx/n' in size <10> not available
+(Font)              Font shape `OT1/pplj/b/n' tried instead on input line 9.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (./typingrules.tex) [1
+
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] (./
+formalism.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 2807 strings out of 493117
+ 36042 string characters out of 6135433
+ 107701 words of memory out of 5000000
+ 6218 multiletter control sequences out of 15000+600000
+ 33647 words of font info for 92 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 25i,11n,35p,220b,259s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
+xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
+live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texl
+ive/2014/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/te
+xlive/2014/texmf-dist/fonts/type1/public/amsfonts/euler/eurm10.pfb></usr/local/
+texlive/2014/texmf-dist/fonts/type1/public/amsfonts/euler/eurm7.pfb></usr/local
+/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/euler/eusm10.pfb></usr/loc
+al/texlive/2014/texmf-dist/fonts/type1/public/fpl/fplbj8a.pfb></usr/local/texli
+ve/2014/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/local/texlive/2014/
+texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2
+014/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2014/tex
+mf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
+Output written on formalism.pdf (2 pages, 90400 bytes).
+PDF statistics:
+ 60 PDF objects out of 1000 (max. 8388607)
+ 43 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

@@ -1,0 +1,109 @@
+\section{Language Definition}
+\label{sec:langdef}
+\begin{itemize}
+  \item Why does this not create open datatypes? How does it differ and how
+  does it get around the problems found in open datatypes?
+\end{itemize}
+
+{\begin{figure}[h]
+\fbox{{\bf Symbol Classes}}
+\vspace{2mm}
+
+$
+\begin{array}{lcl}
+  a,b,c,co & \to & \langle \textrm{type variable} \rangle \\
+  x,f & \to & \langle \textrm{term variable} \rangle \\
+  C & \to & \langle \textrm{coercion constant} \rangle \\
+  T & \to & \langle \textrm{value type constructor} \rangle \\
+  S_n & \to & \langle n-\textrm{ary type function} \rangle \\
+  K & \to & \langle \textrm{data constructor} \rangle
+\end{array}
+$
+
+\vspace{5mm}
+\fbox{{\bf Declarations }}
+\vspace{2mm}
+
+$
+\begin{array}{lcl}
+  pgm & \to & \overline{decl}; e \\
+  decl & \to & \mathbf{data}\;{T\; : \; \overline{\kappa} \to \star \;\mathbf{where}\;} \\
+  & & \;\; \overline{{\tt K} : \forall\; \overline{a:\kappa}.\;
+  \forall\;\overline{b : \iota}. \overline{\sigma} \to T\; \overline{a}
+       \;\;\;}  \\
+  & \alt & \mathbf{type}\; S_n ~:~ \overline{\kappa}^n \to \iota \\
+  & \alt & \mathbf{axiom}\; C ~:~ \sigma_1 \sim \sigma_2
+\end{array}
+$
+
+\vspace{5mm}
+\fbox{{\bf Sorts and Kinds}}
+\vspace{2mm}
+
+$
+\begin{array}{lclr}
+  \delta & \to & \textrm{TY} \alt \textrm{CO} & \textrm{Sorts} \\
+  \kappa, \iota & \to & 
+    \star \alt \kappa_1 \to \kappa_2 \alt \sigma_1 \sim \sigma_2 & \textrm{Kinds}
+\end{array}
+$
+
+\vspace{5mm}
+\fbox{{\bf Types and Coercions}}
+\vspace{2mm}
+
+$
+\begin{array}{lcl}
+  d & \to & a \alt T  \hspace{10mm} \textrm{Atom of sort TY}\\
+  g & \to & c \alt C  \hspace{10mm}  \textrm{Atom of sort CO}\\
+\varphi, \rho, \sigma, \tau, \nu, \gamma &
+  \to & a \alt C \alt T \alt \varphi_1 ~ \varphi_2 \alt S_n ~
+  \overline{\varphi}^n \alt \forall a:\kappa.\varphi \\
+  & \alt & \textrm{sym} ~ \gamma \alt \gamma_1 \circ \gamma_2 \alt
+  \gamma@\varphi \alt \textrm{left} ~ \gamma \alt \textrm{right} ~ \gamma \\
+  & \alt & \gamma \sim \gamma \alt \textrm{rightc} ~ \gamma \alt
+  \textrm{leftc} ~ \gamma \alt \gamma \blacktriangleright \gamma
+\end{array}
+$
+
+\vspace{5mm}
+\fbox{{\bf Syntactic sugar}}
+\vspace{2mm}
+
+$
+\textrm{Types} \;\;\; \kappa \Rightarrow \sigma \; \equiv \; \forall \_ :\kappa. \sigma
+$
+
+\vspace{5mm}
+\fbox{{\bf Terms}}
+\vspace{2mm}
+
+$
+\begin{array}{lcll}
+  u & \to & x \alt K & \textrm{Variables and data consructors} \\
+  e & \to & u & \textrm{Term atoms} \\
+    & \alt & \Lambda a:\kappa.e \alt e \varphi & \textrm{Type abstractions/application} \\
+    & \alt & \lambda x : \sigma.e \alt e_1 ~ e_2 & \textrm{Term abstraction/application} \\
+    & \alt & \letin{x:\sigma}{e_1}{e_2} \\
+    & \alt & \caseof{e_1} {\overline{p \to e_2}} \\
+    & \alt & e \blacktriangleright \gamma & \textrm{Cast}\\
+    \\
+p & \to & K \; \overline{b:\kappa} \; \overline{x:\sigma} & \textrm{Pattern}
+\end{array}
+$
+
+\vspace{5mm}
+\fbox{{\bf Environments}}
+\vspace{2mm}
+
+$
+\Gamma \;\;\; \to \;\;\; \epsilon \alt \Gamma,u:\sigma \alt \Gamma,d:\kappa
+\alt \Gamma,g:\kappa \alt \Gamma,S_n:\kappa
+$
+
+A top-level environment binds only type constructors, \\
+$T,S_n$, data constructors $K$, and coercion constants $C$.
+\caption{The core language for extensible data types}
+\label{fig:langdef}
+\end{figure}}
+

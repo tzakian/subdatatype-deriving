@@ -1,0 +1,70 @@
+
+\newcommand{\Red}[1]{{\color{red} #1}}
+
+\newcommand{\mc}[1]{\pgwrapper{MC}{#1}}  % Matteo
+\newcommand{\tz}[1]{\pgwrapper{TZ}{#1}}  % Tim
+\newcommand{\js}[1]{\pgwrapper{JS}{#1}}  % Jeremy
+\newcommand{\cs}[1]{\pgwrapper{CS}{#1}}  % Ken
+
+\newcommand{\bnfdef}{\ensuremath{::=}}
+
+\newcommand{\il}[1]{\lstinline{#1}}
+
+\newcommand{\alt}{\ensuremath{\;|\;}}
+
+
+% Language Terms and Types
+% ------------------------------------------------------------------------------
+
+% Sans-serif font for terms of the language
+\newcommand\termfont[1]{\mbox{\bf{#1}}}
+
+\newcommand{\LET}{\termfont{let}}
+\newcommand{\IN}{\termfont{in}}
+\newcommand{\CASE}{\termfont{case}}
+\newcommand{\OF}{\termfont{of}}
+\newcommand{\CASEDICT}{\termfont{casedict}}
+\newcommand{\DICT}{\termfont{dict}}
+
+\newcommand{\letin}[3]{\ensuremath{\LET~#1=#2~\IN~#3}}
+\newcommand{\caseof}[2]{\ensuremath{\CASE~#1~\OF~#2}}
+
+\newcommand{\caseoftau}[2]{\ensuremath{\caseof{\hspace{-1mm}[\tau]~#1}{#2}}}
+
+\newcommand{\tyeq}[2]{#1 \sim #2}
+
+\newcommand{\casedict}[4]{\CASEDICT ~ #1 ~ {\tt of} ~ #2 \to #3 \alt \_ \to #4}
+\newcommand{\casedicttau}[4]{\ensuremath{\casedict{\hspace{-1mm}[\tau]~#1}{#2}{#3}{#4}}}
+
+\newcommand{\teq}{\simeq_\tau}
+\newcommand{\rsim}{\sim} %{\stackrel{r}{\sim}}
+
+
+%% \newcommand{\fv}[1]{\ensuremath{Fv \ldbrack {#1} \rdbrack}}
+%% \newcommand{\fvs}[1]{\ensuremath{Fv_s \ldbrack {#1} \rdbrack}}
+%% \newcommand{\fvc}[1]{\ensuremath{Fv_c \ldbrack {#1} \rdbrack}}
+
+\newcommand{\fv}[1]{\ensuremath{Fv \llbracket {#1} \rrbracket}}
+\newcommand{\fvs}[1]{\ensuremath{Fv_s \llbracket {#1} \rrbracket}}
+\newcommand{\fvc}[1]{\ensuremath{Fv_c \llbracket {#1} \rrbracket}}
+
+\newcommand{\fvk}[1]{\ensuremath{Fv_k \llbracket {#1} \rrbracket}}
+
+\newcommand{\kcs}{\overline{k}~\overline{c}~\overline{s}}
+\newcommand{\taukcs}{\overline{\tau_k}~\overline{\tau_c}~\overline{\tau_s}}
+
+\newcommand{\tname}{\ensuremath{\mathbb{T}}}
+% \newcommand{\tname}{\ensuremath{\intercal}}
+% \newcommand{\tname}{\dagger}
+% \usepackage{marvosym} \newcommand{\tname}{\Cross}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}{Lemma}
+
+
+% \newcommand{\alltypefigs}{\cref{fig:basictype, fig:dicttypat, fig:typeenv}}
+% \newcommand{\alltypefigs}{\cref{fig:basictype}-\cref{fig:typeenv}}
+\newcommand{\alltypefigs}{Figs.~\ref{fig:basictype}, \ref{fig:dicttypat}, \ref{fig:typeenv}}
+
+
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
