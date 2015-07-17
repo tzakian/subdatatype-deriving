@@ -1,0 +1,9 @@
+\begin{thebibliography}{1}
+
+\bibitem{systemFC}
+Martin Sulzmann, Manuel~MT Chakravarty, Simon~Peyton Jones, and Kevin Donnelly.
+\newblock System f with type equality coercions.
+\newblock In {\em Proceedings of the 2007 ACM SIGPLAN international workshop on
+  Types in languages design and implementation}, pages 53--66. ACM, 2007.
+
+\end{thebibliography}

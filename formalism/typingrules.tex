@@ -1,3 +1,243 @@
 \section{Typing Rules}
 \label{sec:tyrules}
 
+\begin{figure}
+  \begin{mathpar}
+  \fbox{$\Gamma \vty \sigma : \kappa$}
+  \\
+\inference[TyVar]
+  {(d : \kappa) \in \Gamma & \Gamma \vk \kappa : TY}
+  {\Gamma \vty d : \kappa}
+\and
+\inference[TyApp]
+  {\Gamma \vty \sigma_1 : \kappa_1 \to \kappa_2 & \Gamma \vty \sigma_2 : \kappa_1}
+  {\Gamma \vty \sigma_1 ~ \sigma_2 : \kappa_2}
+\\
+\inference[TySCon]
+  {(S_n : \overline{\kappa}^n \to \iota) \in \Gamma
+    & \Gamma \vty \overline{\sigma : \kappa}^n}
+  {\Gamma \vty S_n \overline{\sigma}^n : \iota}
+\and
+\inference[TyAll]
+  {\Gamma,a:\kappa \vty \sigma : \star
+   & \Gamma \vk \kappa : \delta
+   & a \notin fv(\Gamma)}
+  {\Gamma \vty \forall a:\kappa . \sigma : \star}
+\\
+\fbox{$\Gamma \vco \gamma : \sigma \sim \tau$}
+\\
+\inference[CoRefl]
+  {(a:\kappa) \in \Gamma
+   & \Gamma \vk \kappa : TY}
+  {\Gamma \vco a : a \sim a}
+\and
+\inference[CoVar]
+  {(g : \sigma \sim \tau) \in \Gamma}
+  {\Gamma \vco g : \sigma \sim \tau}
+\and
+\inference[CoAllT]
+  {\Gamma,a:\kappa \vco \gamma : \sigma \sim \tau \\
+   \Gamma \vk \kappa : TY & a \notin fv(\Gamma)}
+   {\Gamma \vco \forall a:\kappa.\gamma : \forall a:\kappa. \sigma \sim
+   \forall a:\kappa. \tau}
+\and
+\inference[CoInstT]
+  {\Gamma \vco \gamma : \forall a.\kappa.\sigma \sim \forall b:\kappa .\tau \\
+  \Gamma \vty v : \kappa}
+  {\Gamma \vco \gamma @ v : [v/a]\sigma \sim [v/b]\tau}
+\and
+\inference[SComp]
+  {\Gamma \vco \overline{\gamma : \sigma \sim \tau}^n
+   & \Gamma \vty S_n \overline{\sigma}^n : \kappa}
+  {\Gamma \vco S_n \overline{\gamma}^n : S_n \overline{\sigma}^n \sim S_n
+  \overline{\tau}^n}
+\and
+\inference[Sym]
+  {\Gamma \vco \gamma : \sigma \sim \tau}
+  {\Gamma \vco \gamma : \tau \sim \sigma}
+\and
+\inference[Trans]
+  {\Gamma \vco \gamma_1 : \sigma_1 \sim \sigma_2 \\
+   \Gamma \vco \gamma_2 : \sigma_2 \sim \sigma_3}
+  {\Gamma \vco \gamma_1 \circ \gamma_2 : \sigma_1 \sim \sigma_3}
+\and
+\inference[Comp]
+  {\Gamma \vco \gamma_1 : \sigma_1 \sim \tau_1
+   & \Gamma \vco \gamma_2 : \sigma_2 \sim \tau_2
+   \\ \Gamma \vty \sigma_1 ~ \sigma_2 : \kappa}
+  {\Gamma \vco \gamma_1 ~ \gamma_2 : \sigma_1 ~\sigma_2 \sim \tau_1 ~ \tau_2}
+\and
+\inference[Left]
+  {\Gamma \vco \gamma : \sigma_1 ~\sigma_2 \sim \tau_1 ~\tau_2}
+  {\Gamma \vco \textrm{left} ~ \gamma : \sigma_1 \sim \tau_1}
+\and
+\inference[Right]
+  {\Gamma \vco \gamma : \sigma_1 ~\sigma_2 \sim \tau_1 ~\tau_2}
+  {\Gamma \vco \textrm{right} ~ \gamma : \sigma_1 \sim \tau_1}
+\and
+\inference[CompC]
+  {\Gamma \vco \gamma : \kappa_1 \sim \kappa_2
+   & \Gamma \vco \gamma' : \sigma_1 \sim \sigma_2
+   \\ \Gamma \vk \kappa_1 : CO}
+  {\Gamma \vco \gamma \Rightarrow \gamma' : (\kappa_1 \Rightarrow \sigma_1)
+  \sim (\kappa_2 \Rightarrow \sigma_2)}
+\and
+\inference[LeftC] % TODO: stack the two coercions
+  {\Gamma \vco \gamma :
+    \kappa_1 \Rightarrow \sigma_1
+    \sim
+    \kappa_2 \Rightarrow \sigma_2}
+  {\Gamma \vco \textrm{leftc} ~ \gamma : \kappa_1 \sim \kappa_2}
+\and
+\inference[RightC]
+  {\Gamma \vco \gamma :
+    \kappa_1 \Rightarrow \sigma_1
+    \sim
+    \kappa_2 \Rightarrow \sigma_2}
+  {\Gamma \vco \textrm{rightc} ~ \gamma : \sigma_1\sim \sigma_2}
+\and
+\inference[$(\sim)$]
+  {\Gamma \vco \gamma_1 : \sigma_1 \sim \tau_1
+   & \Gamma \vco \gamma_2 : \sigma_2 \sim \tau_2}
+  {\Gamma \vco \gamma_1 \sim \gamma_2 : (\sigma_1 \sim \sigma_2) \sim (\tau_1 \sim \tau_2)}
+\and
+\inference[CastC]
+  {\Gamma \vco \gamma_1 : \kappa
+   & \Gamma \vco \gamma_2 \kappa \sim \kappa'}
+   {\Gamma \vco \gamma_1 \blacktriangleright \gamma_2}
+\\
+\fbox{$\Gamma \ve e : \sigma$}
+\\
+\inference[Var]
+  {(u:\sigma) \in \Gamma}
+  {\Gamma \ve u : \sigma}
+\and
+\inference[Case]
+  {\Gamma \ve e : \sigma
+   & \overline{\Gamma \vp p \to e : \sigma \to \tau}}
+  {\Gamma \ve \caseof{e}{\overline{p \to e}} : \tau}
+\and
+\inference[Let]
+  {\Gamma \ve e_1 : \sigma_1
+   & \Gamma , x:\sigma_1 \ve e_2 : \sigma_2}
+  {\Gamma \ve \letin{x:\sigma_1}{e_1}{e_2} : \sigma_2}
+\and
+\inference[Cast]
+  {\Gamma \ve e : \sigma
+   & \Gamma \vco \gamma : \sigma \sim \tau}
+  {\Gamma \ve e \blacktriangleright \gamma : \tau}
+\and
+\inference[Abs]
+  {\Gamma \vty \sigma_x : \star \\
+   \Gamma ,x:\sigma_x \ve e : \sigma}
+  {\Gamma \ve \lambda x:\sigma_x . e : \sigma_x \to \sigma}
+\and
+\inference[App]
+  {\Gamma \ve e_1 : \sigma_2 \to \sigma_1 \\
+   \Gamma \ve e2 : \sigma_2}
+  {\Gamma \ve e_1 ~ e_2 : \sigma_1}
+\and
+\inference[AbsT]
+  {\Gamma a : \kappa \ve e : \sigma 
+   & \Gamma \vk \kappa : \delta
+   & a \notin fv(\Gamma)}
+  {\Gamma \ve \Lambda a : \kappa.e : \forall a : \kappa . \sigma}
+\and
+\inference[AppT]
+  {\Gamma \ve e : \forall a : \kappa .\sigma
+   & \Gamma \vk \kappa : \delta
+   & \Gamma \vdash_{\delta} \varphi : \kappa}
+  {\Gamma \ve e ~ \varphi : \sigma [\varphi/a]}
+\\
+\fbox{$\Gamma \vp p \to e : \sigma \to \tau$}
+\\
+\inference[Alt]
+  {K : \forall \overline{a : \kappa} . \forall \overline{b : \iota}.
+  \overline{\sigma} \to T ~ \overline{a} \in \Gamma
+   & \theta = [\overline{v/a}]
+   & \Gamma , \overline{b:\theta( \iota ) , \overline{x: \theta(\sigma)}} \ve e : \tau}
+  {\Gamma \vp K ~\overline{b:\theta(\iota)} ~ \overline{x:\theta(\sigma)}
+  \to e : T ~ \overline{v} \to \tau}
+  \end{mathpar}
+  \caption{Typing rules for the core language of $F_C(X)$}
+  \label{fig:typerules}
+\end{figure}
+
+\begin{figure}
+\begin{minipage}{0.7\linewidth}
+\begin{mathpar}
+\fbox{$\Gamma \vdash decl : \Gamma'$}
+\\
+\inference[Data]
+  {\overline{\Gamma \vty \sigma : \star}
+   & \Gamma \vk \kappa : TY}
+  {\Gamma \vdash \mathbf{data} ~ T:\kappa ~ \mathbf{where} 
+    ~ \overline{K : \sigma} : (T : \kappa, \overline{K : \sigma})}
+\\
+\inference[Type]
+  {\Gamma \vk \kappa : TY}
+  {\Gamma \vdash (\mathbf{type} ~ S : \kappa) : (S : \kappa)}
+\and
+\inference[Coerce]
+  {\Gamma \vk \kappa : CO}
+  {\Gamma \vdash (\mathbf{axiom} ~ C : \kappa) : (C : \kappa)}
+\end{mathpar}
+\end{minipage}
+\begin{minipage}{0.3\linewidth}
+\begin{mathpar}
+\fbox{$\Gamma \vdash pgm : \sigma$}
+\\
+\inference[Pgm]
+  {\overline{\Gamma \vdash decl : \Gamma_d} & \Gamma =
+  \Gamma_0,\overline{\Gamma_d}
+  \\
+  \Gamma \ve e : \sigma}
+  {\Gamma_0 \vdash \overline{decl}; e : \sigma}
+\end{mathpar}
+\end{minipage}
+\caption{Environment extension rules for $F_C(X)$}
+\label{fig:envextension}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
