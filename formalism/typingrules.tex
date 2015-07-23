@@ -106,7 +106,7 @@
    & \Gamma \vco \gamma_2 \kappa \sim \kappa'}
    {\Gamma \vco \gamma_1 \blacktriangleright \gamma_2}
 \\
-\fbox{$\Gamma \ve e : \sigma$}
+\fbox{$\Gamma \ve e : \zeta$}
 \\
 \inference[Var]
   {(u:\sigma) \in \Gamma}
@@ -188,56 +188,128 @@
 \fbox{$\Gamma \vdash pgm : \sigma$}
 \\
 \inference[Pgm]
-  {\overline{\Gamma \vdash decl : \Gamma_d} & \Gamma =
-  \Gamma_0,\overline{\Gamma_d}
+  {\overline{\Gamma \vdash cdecl : \Gamma_c} & \Gamma =
+  \Gamma_0,\overline{\Gamma_c}
+  \\
+  \overline{\Gamma \vdash decl : \Gamma_d} & \Gamma =
+  \Gamma,\overline{\Gamma_d}
   \\
   \Gamma \ve e : \sigma}
-  {\Gamma_0 \vdash \overline{decl}; e : \sigma}
+  {\Gamma_0 \vdash \overline{cdecl}; \overline{decl}; e : \sigma}
 \end{mathpar}
 \end{minipage}
 \caption{Environment extension rules for $F_C(X)$}
 \label{fig:envextension}
 \end{figure}
+\subsection{Extended typing rules}
+{\bf TODO:}
+\begin{itemize}
+  \item {\bf Explain what cast extrusion is and why it's bad}
+  \item Need to formalize ``Get all the data constructors for this type
+  constructor'' in this system since we will need it for ExtData in our
+  environment extension rules.
+  \item We need the extra equivalences since we need to prevent casts
+  between differenet constructors that have the same type.
+\end{itemize}
+We now extend the core typing rules for System $F_C$ with a way to cast
+between extended and core data constructors, while at the same time
+preventing ``cast extrusion'' on the constructors and corresponding types.
+\\
 
+\noindent {\bf Definition}
+We say that $\sigma_1 \tstack{\equiv}{[T_1,T_2]} \sigma_2$ if:
+\begin{mathpar}
+\sigma_1 = \forall \overline{a:\kappa} \forall
+\overline{b:\iota}.\overline{\sigma}\to T_1 ~\overline{a}
+\\
+\textrm{and}
+\\
+\sigma_2 = \forall \overline{a:\kappa} \forall
+\overline{b:\iota}.\overline{\sigma}\to T_2 ~\overline{a}
+\end{mathpar}
+i.e., that they are they same type modulo substitution of the type
+constructor.
+\\
 
+\noindent {\bf Definition:} We define $\zeta\llbracket T/T' \rrbracket$ to
+be the substitution of the type constructor application the underlying type
+$\sigma$.
+\\
 
+\noindent{\bf Definition:} We say that $T$ extends $T'$ and that $T > T'$ if $T$
+is a type constructor derived using a {\bf extends} form.
 
+\begin{thm}[Transitivity of $(>)$]
+\begin{proof}
+WRITE ME \qedhere
+\end{proof}
+\end{thm}
 
+\begin{thm}[$\llbracket T/T' \rrbracket$ preserves well-typedness]
+\begin{proof}
+WRITE ME \qedhere
+\end{proof}
+\end{thm}
 
+\begin{thm}[Extension casts preserve well-typedness]
+\begin{proof}
+WRITE ME \qedhere
+\end{proof}
+\end{thm}
 
+\begin{thm}[Domain-restricted reachability of types]
+\begin{proof}
+WRITE ME \qedhere
+\end{proof}
+\end{thm}
 
+We then extend the typing judgements in Figure~\ref{fig:typerules} with the
+two rules in Figure~\ref{fig:typerulesextra}, and omit the other rules (transitivity etc.) since these can be
+easily figured out.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{figure}[H]
+\begin{mathpar}
+\inference[ECoreCast]
+  {\Gamma \ve e : \zeta'
+   & \Gamma \vco \gamma : \zeta' \tstack{\sim}{[T_1, T_2]} \zeta}
+  {\Gamma \ve e \tstack{\triangleright}{[T_1,T_2]} \gamma: \zeta}
+\and
+\inference[CoCoreVar]
+  {\zeta_1 = ({\tt K}, \sigma_1) \in \Gamma
+   & \zeta_2 = ({\tt K}, \sigma_2) \in \Gamma
+   \\
+   \exists T_1, T_2 .\left( \sigma_1 \tstack{\equiv}{[T_1, T_2]} \sigma_2\right)
+   &
+   (\gamma : \zeta_1 \tstack{\sim}{[T_1,T_2]} \zeta_2) \in \Gamma
+   }
+  {\Gamma \vco \gamma : \zeta_1 \tstack{\sim}{[T_1, T_2]} \zeta_2}
+\\
+\fbox{$\Gamma \vdash cdecl : \Gamma'$}
+\\
+\inference[CoreData]
+  {\overline{\Gamma \vty \sigma : \star}
+   & \Gamma \vk \kappa : TY}
+  {\Gamma \vdash \mathbf{data}\;\mathbf{open}\;{T\; : \;
+  \overline{\kappa} \;\mathbf{where}\;} \overline{K : \sigma} :
+  (T : \kappa, \overline{K : \sigma}, (T;\overline{(K , \sigma)}))}
+\and
+\inference[ExtData]
+  {\overline{\Gamma \vty \sigma : \star}
+   & \Gamma \vk \kappa : TY
+   \\
+   \overline{(K',\sigma')} \stackrel{\Delta}{=}\overline{\forall (K',
+   \sigma'') \in lookup(T,\Gamma).(K',\sigma'')\llbracket T'/T \rrbracket}
+   }
+  {\Gamma \vdash \mathbf{data}\;{T\; : \;
+  \overline{\kappa} \;\mathbf{where}\;} \overline{K : \sigma}\;
+  \mathbf{extends}(\overline{T}) :
+  (T':\kappa, \overline{K:\sigma}, \overline{K':\sigma'}, 
+  \overline{(K',\sigma') \tstack{\sim}{[T, T']} (K',\sigma'')})
+  }
+\end{mathpar}
+\caption{Extension of the typing rules to allow extension of data types}
+\label{fig:typerulesextra}
+\end{figure}
 
 
 
