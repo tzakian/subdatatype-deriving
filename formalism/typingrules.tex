@@ -210,10 +210,18 @@
   environment extension rules.
   \item We need the extra equivalences since we need to prevent casts
   between differenet constructors that have the same type.
+  \item {\bf Important:} Need to ensure that the type constructors that we are extending are
+  the same kind as the one that extends it.
 \end{itemize}
 We now extend the core typing rules for System $F_C$ with a way to cast
 between extended and core data constructors, while at the same time
 preventing ``cast extrusion'' on the constructors and corresponding types.
+\\
+
+\noindent {\bf Notation:} Throughout this section we use the notation $K_T$ to
+represent a given constructor $K$ under a specific type constructor
+context e.g., $K_T$ would be that same constructor as $K_{T'}$ except
+that $K_T$ produces a type $T$ and $K_{T'}$ produces a type $T'$.
 \\
 
 \noindent {\bf Definition}
@@ -237,15 +245,37 @@ $\sigma$.
 \\
 
 \noindent{\bf Definition:} We say that $T$ extends $T'$ and that $T > T'$ if $T$
-is a type constructor derived using a {\bf extends} form.
+is a type constructor derived using a {\bf extends} form that includes $T'$.
 
 \begin{thm}[Transitivity of $(>)$]
+Let $T_1 > T_2$ and $T_2 > T_1$. Then $T_1 > T_3$.
 \begin{proof}
-WRITE ME \qedhere
+Let $K_3, K_2, K_1$ be the set of constructors for $T_3, T_2, T_1$
+respectively. Then we have that $K_3 \subset K_2 \subset K_1$. Since $T_2 >
+T_3$ we have that $\forall K \in K_3$ there exists a cast $\gamma$ such that 
+\begin{equation}
+  K_3 \ni (K : \sigma) \tstack{\triangleright}{[T_3,T_2]} \gamma :(K : \sigma') \in K_2
+\end{equation}
+Similarly, since $T_1 > T_2$. We have that $\forall K \in K_2$ that there
+exists a $\gamma'$ such that
+\begin{equation}
+  K_2 \ni (K : \sigma') \tstack{\triangleright}{[T_2,T_1]} \gamma' : (K : \sigma'') \in K_1
+\end{equation}
+We therefore have by transitivity of $\tstack{\sim}{[T,T']}$ that $\forall
+K \in K_3$ that
+\begin{equation}
+  K_3 \ni (K : \sigma) \tstack{\triangleright}{[T_3,T_1]} \gamma \circ
+  \gamma' : (K : \sigma'') \in K_1
+\end{equation}
+and hence, we have that $T_1 > T_3$
+\qedhere
 \end{proof}
 \end{thm}
 
 \begin{thm}[$\llbracket T/T' \rrbracket$ preserves well-typedness]
+  Let $\Gamma \ve K_T : \sigma$ and $\Gamma \ve K_{T'}: \sigma'$. 
+  Then we have that $\sigma' = \sigma \llbracket T/T' \rrbracket$ -- i.e., that
+  if $\Gamma \ve K_T : \sigma$, then $\Gamma \ve K_{T'} : \sigma \llbracket T/T' \rrbracket$. 
 \begin{proof}
 WRITE ME \qedhere
 \end{proof}
@@ -289,7 +319,7 @@ easily figured out.
 \inference[CoreData]
   {\overline{\Gamma \vty \sigma : \star}
    & \Gamma \vk \kappa : TY}
-  {\Gamma \vdash \mathbf{data}\;\mathbf{open}\;{T\; : \;
+  {\Gamma \vdash \mathbf{data}\;\mathbf{extendable}\;{T\; : \;
   \overline{\kappa} \;\mathbf{where}\;} \overline{K : \sigma} :
   (T : \kappa, \overline{K : \sigma}, (T;\overline{(K , \sigma)}))}
 \and
@@ -300,12 +330,27 @@ easily figured out.
    \overline{(K',\sigma')} \stackrel{\Delta}{=}\overline{\forall (K',
    \sigma'') \in lookup(T,\Gamma).(K',\sigma'')\llbracket T'/T \rrbracket}
    }
-  {\Gamma \vdash \mathbf{data}\;{T\; : \;
+  {\Gamma \vdash \mathbf{data}\;{T'\; : \;
   \overline{\kappa} \;\mathbf{where}\;} \overline{K : \sigma}\;
   \mathbf{extends}(\overline{T}) :
   (T':\kappa, \overline{K:\sigma}, \overline{K':\sigma'}, 
   \overline{(K',\sigma') \tstack{\sim}{[T, T']} (K',\sigma'')})
   }
+\and
+\Xi \stackrel{\Delta}{=} (T':\kappa, \overline{K:\sigma}, \overline{K':\sigma'}, 
+      \overline{(K',\sigma') \tstack{\sim}{[T, T']} (K',\sigma'')})
+\and
+\inference[ExtData]
+  {\overline{\Gamma \vty \sigma : \star}
+   & \Gamma \vk \kappa : TY
+   \\
+   \overline{(K',\sigma')} \stackrel{\Delta}{=}\overline{\forall (K',
+   \sigma'') \in lookup(T,\Gamma).(K',\sigma'')\llbracket T'/T \rrbracket}
+   }
+  {\Gamma \vdash \mathbf{data}\;\mathbf{extendable}\;{T'\; : \;
+  \overline{\kappa} \;\mathbf{where}\;} \overline{K : \sigma}\;
+  \mathbf{extends}(\overline{T}) :
+  ( \Xi , (T'; (K::K', \sigma :: \sigma'))) }
 \end{mathpar}
 \caption{Extension of the typing rules to allow extension of data types}
 \label{fig:typerulesextra}
@@ -319,7 +364,7 @@ matching on the data types e.g.,
 f :: T1 -> T2
 f ...
 \end{lstlisting}
-In this case we perform coverage analysis on @T1@ and, when @f@ fails to
+In this case we perform coverage analysis on {\tt T1} and, when {\tt f} fails to
 match on all of the data types, automatically inserts a default clause (if
 there is not already one) which behaves like the identity function, except
 that it inserts a cast $(K,\sigma) \tstack{\triangleright}{T_1,T_2}$. We
@@ -328,18 +373,19 @@ now formalise this argument.
 Define the set of all constructors of an extended data type $T$ 
 coming from extended data types as $C$. Define the set of all specific
 constructors defined by $T$ as $D$. Then we have that all of the
-constructors of $T$ are $C \squarecup D$.
+constructors of $T$ are $C \sqcup D$.
 
-Now when performing coverage analysis of @f@ we consider two cases --
+Now when performing coverage analysis of {\tt f} we consider two cases --
 letting $R$ be the covered cases and $R'$ the non-covered cases:
 \begin{itemize}
-  \item $R = C \squarecup D$: In this case, the programmer has manually
+  \item $R = C \sqcup D$: In this case, the programmer has manually
     coded a conversion between the two data types. Therefore, we do not
     have to insert any casts.
-  \item $R \supsetneq D$. Then we add a default clause to @f@ that performs
+  \item $R \supsetneq D$. Then we add a default clause to {\tt f} that performs
     a type coercion on the input.
   \item $R \subsetneq D$. In this case, it is an error, and we do not
-    insert casts, since we cannot add a catchall clause to @f@.\note{It is
+    insert casts, since we cannot add a catchall clause to {\tt f}.
+  \item {\bf It is
     worth noting that we could relax this requirement and add patterns for
   everything in $C \setminus R$ this would provide correctness right?}
 \end{itemize}

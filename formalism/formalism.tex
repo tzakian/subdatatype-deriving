@@ -1,20 +1,21 @@
 \documentclass{article}
-\usepackage[osf,sc]{mathpazo}
+%\usepackage[osf,sc]{mathpazo}
 %\usepackage{eulervm}
 \usepackage{float}
-\usepackage{lstlisting}
+\usepackage{listings}
 \usepackage{mdframed}
 \usepackage{stmaryrd}
 \usepackage{mathpartir}
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage[margin=0.7in]{geometry}
-\usepackage{xcolor}
 \usepackage{amssymb}
+\usepackage{textcomp}
 \usepackage[inference]{semantic}
 \floatstyle{boxed}
 \restylefloat{figure}
 \input{macro-defs}
+\input{haskell_style}
 
 \title{Formalism for Datatype Extensions in Haskell}
 \author{Tim Zakian}
@@ -23,6 +24,8 @@
 \maketitle
 \input{langdef}
 \input{typingrules}
+\input{translation}
+\input{example}
 
 \bibliographystyle{plain}
 \bibliography{refs}

@@ -55,7 +55,7 @@ $
 $
 \begin{array}{lcl}
   pgm & \to & \overline{cdecl}; \overline{decl}; e \\
-  cdecl & \to & \mathbf{data}\;\mathbf{open}\;{T\; : \; \overline{\kappa} \to \star \;\mathbf{where}\;} \\
+  cdecl & \to & \mathbf{data}\;\mathbf{extendable}\;{T\; : \; \overline{\kappa} \to \star \;\mathbf{where}\;} \\
   & & \;\; \overline{{\tt K} : \forall\; \overline{a:\kappa}.\;
   \forall\;\overline{b : \iota}. \overline{\sigma} \to T\; \overline{a}
        \;\;\;}  \\
@@ -64,7 +64,7 @@ $
   \forall\;\overline{b : \iota}. \overline{\sigma} \to T\; \overline{a}
        \;\;\;} \\
   & & \mathbf{extends}(\overline{T})\\
-  & \alt & \mathbf{data}\;\mathbf{open}\;{T\; : \; \overline{\kappa} \to \star \;\mathbf{where}\;} \\
+  & \alt & \mathbf{data}\;\mathbf{extendable}\;{T\; : \; \overline{\kappa} \to \star \;\mathbf{where}\;} \\
   & & \;\; \overline{{\tt K} : \forall\; \overline{a:\kappa}.\;
   \forall\;\overline{b : \iota}. \overline{\sigma} \to T\; \overline{a}
        \;\;\;} \\

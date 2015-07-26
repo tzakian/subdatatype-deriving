@@ -1,0 +1,101 @@
+\section{Translation}
+\label{sec:translation}
+In this section we go about detailing the source translation in order to
+implement these rules and to allow the use of extendable data types in
+Haskell.
+\subsubsection{Insertion of Casts}
+
+In order to insert the casts correctly, we must do coverage analysis of the
+matching on the data types e.g.,
+\begin{lstlisting}
+f :: T1 -> T2
+f ...
+\end{lstlisting}
+In this case we perform coverage analysis on {\tt T1} and, when {\tt f} fails to
+match on all of the data types, automatically inserts a default clause (if
+there is not already one) which behaves like the identity function, except
+that it inserts a cast $(K,\sigma) \tstack{\triangleright}{T_1,T_2}$. We
+now formalise this argument.
+
+Define the set of all constructors of an extended data type $T$ 
+coming from extended data types as $C$. Define the set of all specific
+constructors defined by $T$ as $D$. Then we have that all of the
+constructors of $T$ are $C \sqcup D$.
+
+Now when performing coverage analysis of {\tt f} we consider two cases --
+letting $R$ be the covered cases and $R'$ the non-covered cases:
+\begin{itemize}
+  \item $R = C \sqcup D$: In this case, the programmer has manually
+    coded a conversion between the two data types. Therefore, we do not
+    have to insert any casts.
+  \item $R \supsetneq D$. Then we add a default clause to {\tt f} that performs
+    a type coercion on the input.
+  \item $R \subsetneq D$. In this case, it is an error, and we do not
+    insert casts, since we cannot add a catchall clause to {\tt f}.
+  \item {\bf It is
+    worth noting that we could relax this requirement and add patterns for
+  everything in $C \setminus R$ this would provide correctness right?}
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

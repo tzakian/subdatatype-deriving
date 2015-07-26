@@ -1,0 +1,66 @@
+\section{Example}
+\label{sec:example}
+\begin{lstlisting}
+{-# LANGUAGE GADTs #-}
+module Examples.Ex1 where
+
+
+-- We start by defining the core ADT.
+data extendable Core where
+  Unit :: Core
+  Var  :: Int  -> Core
+  Lam  :: Core -> Core
+  App  :: Core -> Core -> Core
+
+-- We can then extend this core with other datatypes, note that even though
+-- we treat the core as part of this data type (SExp) IT IS THE EXACT SAME
+-- AS Core
+data SExp where
+    CallCC :: SExp -> SExp
+    Abort  :: SExp -> SExp
+  deriving (Show)  
+  extending (Core)
+
+-- We can then extend this core with other datatypes, note that even though
+-- we treat the core as part of this data type (TExp) IT IS THE EXACT SAME
+-- AS Core
+data TExp where
+    Add :: TExp -> TExp -> TExp
+  deriving (Show)  
+  extending (Core)
+
+-- Since the core part is the exact same -- "shared" --  we no longer have
+-- to convert every single part of the datatype when converting between the two:
+convert :: SExp -> TExp
+convert (CallCC _ _) = Unit
+convert (Abort _ _)  = Unit
+convert t            = t
+
+--------------- What this should behave like -------------
+
+data SExp where
+    Unit :: SExp
+    Var  :: Int  -> SExp
+    Lam  :: SExp -> SExp
+    App  :: SExp -> SExp -> SExp
+    CallCC :: SExp -> SExp
+    Abort  :: SExp -> SExp
+
+data TExp where
+    Unit :: TExp
+    Var  :: Int  -> TExp
+    Lam  :: TExp -> TExp
+    App  :: TExp -> TExp -> TExp
+    Add :: TExp -> TExp -> TExp
+
+convert :: SExp -> TExp
+convert (CallCC _ _) = Unit
+convert (Abort _ _)  = Unit
+convert Unit = Unit
+convert Var = Var
+convert (Lam e) = Lam $ convert e
+convert (App e1 e2)  = App (convert e1) (convert e2)
+\end{lstlisting}
+
+
+
